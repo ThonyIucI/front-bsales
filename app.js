@@ -31,7 +31,7 @@ const getProducts = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    alert(json.stringify(error.msg));
+    alert(JSON.stringify(error.msg));
     console.log(error);
   }
 };
@@ -41,7 +41,7 @@ const getCategories = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    alert(json.stringify(error.msg));
+    alert(JSON.stringify(error.msg));
     console.log(error);
   }
 };
