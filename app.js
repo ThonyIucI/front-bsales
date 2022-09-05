@@ -23,7 +23,8 @@ const getProducts = async () => {
     const res = await axios.post(`${url}/products`, filters);
     return res.data;
   } catch (error) {
-    alert(`${error?.response?.data}`);
+    swal('Ups!', `${error?.response?.data}`, 'warning');
+
     console.log('Error: ', error?.response?.data);
   }
 };
@@ -32,7 +33,7 @@ const getCategories = async () => {
     const res = await axios(`${url}/categories`);
     return res.data;
   } catch (error) {
-    alert(`${error?.response?.data}`);
+    swal('Ups!', `${error?.response?.data}`, 'warning');
     console.log('Error: ', error?.response?.data);
   }
 };
