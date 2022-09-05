@@ -12,7 +12,7 @@ const buttonSearch = document.getElementById('buttonSearch'),
   maxPrice = document.getElementById('maxPrice'),
   minDisc = document.getElementById('minDisc'),
   maxDisc = document.getElementById('maxDisc');
-//   formCheckInput = document.getElementsByClassName('checkbox');
+
 document.addEventListener('DOMContentLoaded', async () => {
   addProduct(await getProducts());
   addCategory(await getCategories());
@@ -20,60 +20,51 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 const getProducts = async () => {
   try {
-    const res = await fetch(`${url}/products`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(filters),
-    });
-    const data = await res.json();
-    return data;
+    const res = await axios.post(`${url}/products`, filters);
+    return res.data;
   } catch (error) {
-    // alert(error);
-    console.log(error, error.msg);
+    alert(`${error?.response?.data}`);
+    console.log('Error: ', error?.response?.data);
   }
 };
 const getCategories = async () => {
   try {
-    const res = await fetch(`${url}/categories`);
-    const data = await res.json();
-    return data;
+    const res = await axios(`${url}/categories`);
+    return res.data;
   } catch (error) {
-    // alert(error);
-    console.log(error, error.msg);
+    alert(`${error?.response?.data}`);
+    console.log('Error: ', error?.response?.data);
   }
 };
 
 const addProduct = (data) => {
-  if (!data?.length) {
-    alert('No existen coincidencias');
-  }
-  data?.forEach((p) => {
-    cardProduct
-      .querySelector('img')
-      .setAttribute(
-        'src',
-        p.url_image
-          ? p.url_image
-          : 'https://bitzen.cl/49-medium_default/bsale.jpg'
-      );
-    cardProduct.querySelector('span').textContent = p.discount
-      ? `${p.discount}% off`
-      : '';
-    cardProduct.querySelector('h6').textContent = p.name;
-    cardProduct.querySelector('p').textContent = p.discount
-      ? `$${p.price} now: $${(p.price * (100 - p.discount)) / 100}`
-      : `$${p.price}`;
+  if (!data?.length) return;
 
-    const clone = cardProduct.cloneNode(true);
-    fragmentCard.appendChild(clone);
-  });
+  Array.isArray(data) &&
+    data?.forEach((p) => {
+      cardProduct
+        .querySelector('img')
+        .setAttribute(
+          'src',
+          p.url_image
+            ? p.url_image
+            : 'https://bitzen.cl/49-medium_default/bsale.jpg'
+        );
+      cardProduct.querySelector('span').textContent = p.discount
+        ? `${p.discount}% off`
+        : '';
+      cardProduct.querySelector('h6').textContent = p.name;
+      cardProduct.querySelector('p').textContent = p.discount
+        ? `$${p.price} now: $${(p.price * (100 - p.discount)) / 100}`
+        : `$${p.price}`;
+
+      const clone = cardProduct.cloneNode(true);
+      fragmentCard.appendChild(clone);
+    });
   products.appendChild(fragmentCard);
 };
 const addCategory = (data) => {
-  data.map((p) => {
+  data?.map((p) => {
     category.querySelector('p').textContent = p.name;
     category.querySelector('input').setAttribute('id', `cat${p.id}`);
 
