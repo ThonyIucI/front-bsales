@@ -31,7 +31,7 @@ const getProducts = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    alert(JSON.stringify(error.msg));
+    alert(error.msg);
     console.log(error);
   }
 };
@@ -41,13 +41,13 @@ const getCategories = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    alert(JSON.stringify(error.msg));
+    alert(error.msg);
     console.log(error);
   }
 };
 
 const addProduct = (data) => {
-  if (!data.length) {
+  if (!data?.length) {
     alert('No existen coincidencias');
   }
   data?.forEach((p) => {
