@@ -24,8 +24,7 @@ const getProducts = async () => {
     return res.data;
   } catch (error) {
     swal('Ups!', `${error?.response?.data}`, 'warning');
-
-    console.log('Error: ', error?.response?.data);
+    // console.log('Error: ', error?.response?.data);
   }
 };
 const getCategories = async () => {
@@ -34,7 +33,7 @@ const getCategories = async () => {
     return res.data;
   } catch (error) {
     swal('Ups!', `${error?.response?.data}`, 'warning');
-    console.log('Error: ', error?.response?.data);
+    // console.log('Error: ', error?.response?.data);
   }
 };
 
