@@ -31,8 +31,8 @@ const getProducts = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    alert(error.msg);
-    console.log(error);
+    // alert(error);
+    console.log(error, error.msg);
   }
 };
 const getCategories = async () => {
@@ -41,8 +41,8 @@ const getCategories = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    alert(error.msg);
-    console.log(error);
+    // alert(error);
+    console.log(error, error.msg);
   }
 };
 
