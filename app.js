@@ -1,4 +1,4 @@
-const url = 'https://bsales-test.herokuapp.com/api',
+const url = 'https://bsales-api.herokuapp.com/api/',
   filters = {},
   products = document.getElementById('products'),
   cardProduct = document.getElementById('template-card').content,
